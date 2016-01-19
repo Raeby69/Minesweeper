@@ -1,0 +1,41 @@
+
+                                        Minesweeper
+                                                  Realizat de:
+                                                  	Tache Lavinia
+                                                    Vladulescu Georgiana
+                                                    Viziru Luciana
+
+1.	Descrierea proiectului
+
+Minesweeper este un joc popularizat de sistemul de operare Windows, care
+presupune generarea unei matrice care are pe anumite pozitii bombe, iar celelalte casute contin numarul de bombe adiacente.
+	Scopul jocului este indentificarea tuturor casutelor care contin bombe pe baza casutelor cu numere. Identificarea se face prin marcarea casutelor care contin bombe cu un steag. 
+	
+Jocul se incheie in urmatoarele doua situatii:
+	Indentificarea tuturor casutelor care contin bombe si dezvaluirea tuturor celulelor (caz in care jucatorul castiga)
+	Dezvaluirea unei bombe(caz in care jucatoru pierde)
+
+2.	Implementare:
+Pentru implementarea proiectului am folosit o clasa celula(Cell), alaturi de urmatoarele IV-uri : Initial, unCover, WriteAdjacencyMines, WriteColumnIndex , WriteLineIndex, createTable, Main.
+
+	 Clasa Celula : contine urmatoarele campuri:
+o	Flag -> Boolean : marcat True daca celula este cu steg, False in caz contrar
+o	isCoverded -> Boolean : marcat True daca celula este acoperita, False in caz contrar
+o	Line, Column -> Integer : coordonatele celulei
+o	isMine -> Boolean : marcat True daca celula contine bomba, False in caz contrar
+o	AdjacencyMatrix -> Integer : valoarea numerica a celulei( -1 in cazul in care este bomba in acea celula, numarul de bombe adiacente altfel)
+
+Fiecare camp al clasei contine getteri si setter intrucat datele in LabView sunt by default private.
+	Metodele implementate sunt:
+o	Initial : Seteaza campul isCoverded ca fiind True
+o	unCoverded : seteaza campul isCoverded ca fiind False
+o	WriteAdjacencyMines : initializeaza numarul de mine adiacente pentru fiecare celula
+o	WriteColumnIndex si WriteLineIndex : initializeaza coordonatele celulei.
+o	createTable : construieste matricea de imagini corespunzatoare tablei de joc la starea curenta
+o	main : executa secvential metodele descries in vederea desfasurarii jocului
+Pentru implemetare am ales sa tinem tabla de joc sub forma unei matrice de celule, fiecare  celula comportandu-se diferit in functie de tipul pe care il reprezinta(intreg cu numarul de mine adiacente, bomba, steag).
+
+	Jocul incepe cu apelare metodei Initial pentru a instantia si initializa celulele din table de joc. Pentru inceput celulele sunt nedescoperite(campul isCoverded marcandu-se True) si sunt plasate bombele(campul isMine marcandu-se True).
+	Tabla de joc(matricea care contine celulele cu reprezentarea jocului) este afisata la output prin construirea unei matrice de imagini(imaginile associate celulelor in matricea de obiecte concatenate).
+	
+		Intractiunea cu utilizatorul se realizeaza in cadrul unei bucle, iar acesta poate descoperi cellule dand coordonatele celulei si actiunea(descopera celula sau seteaza steag). Pentru a putea actualize la fiecare pas matricea de obiecte care contine starile am folosit metoda deja implementata Feedback care memoreaza outputul anterior pentru a putea lucre ulterior cu aceasta.
